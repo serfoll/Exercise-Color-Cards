@@ -1,0 +1,46 @@
+/* hint - we can invert a variable by multiplying it with -1 */
+:root {
+  --card-height: 130px;
+  --card-width: calc(var(--card-height) * (6 / 4));
+  --i: 0;
+}
+
+/* put the stack of cards in center */
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* offset the cards by height/width so they are in the center of the screen */
+.container {
+  position: relative;
+  transform: translate(
+    calc(var(--card-height) / 2 * -1),
+    calc(var(--card-height) / 2 * -1)
+  );
+}
+
+/* base setup of size for the cards */
+.card {
+  width: var(--card-height);
+  height: var(--card-width);
+  position: absolute;
+
+  /* hint - hue in hsl goes from 0-360 */
+  /* hint - second color is hue 275, third is 235 ... */
+  background-color: hsl(315, 100%, 60%);
+
+  /* hint - use rotate with variables and offset the rotation origin */
+  /* hint - first card is at -45deg then add 10deg for each */
+  transform: rotate(-45deg);
+  transform-origin: center 120%;
+  
+  /* hint - the cards are stacked in the wrong order, can we change that with a css property? */
+}
+
+/* hint - use nth-child selectors or similar and override variables */
+.card:nth-child(2) {
+  --i: 1;
+}
