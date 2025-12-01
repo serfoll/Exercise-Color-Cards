@@ -1,11 +1,24 @@
-/* hint - we can invert a variable by multiplying it with -1 */
+/* ================================================
+   EASY VERSION – STEGVIS GUIDE (med TODO)
+   Du ska:
+   1. Ge varje kort en färg (ändra hue)
+   2. Rota varje kort lite olika
+   3. Sätta rätt ordning på korten
+================================================ */
+
+/* Grundvariabler */
 :root {
   --card-height: 130px;
   --card-width: calc(var(--card-height) * (6 / 4));
+
+  /* TODO:
+     Den här variabeln kommer vara olika för varje kort.
+     Vi börjar med --i:0 (första kortet).
+  */
   --i: 0;
 }
 
-/* put the stack of cards in center */
+/* Centrera allt */
 body {
   display: flex;
   align-items: center;
@@ -13,7 +26,7 @@ body {
   min-height: 100vh;
 }
 
-/* offset the cards by height/width so they are in the center of the screen */
+/* Flytta startpunkten till mitten */
 .container {
   position: relative;
   transform: translate(
@@ -22,25 +35,77 @@ body {
   );
 }
 
-/* base setup of size for the cards */
+/* ================================================
+   TODO: Här arbetar du mest!
+   Varje kort utgår från denna stil.
+================================================ */
 .card {
   width: var(--card-height);
   height: var(--card-width);
   position: absolute;
 
-  /* hint - hue in hsl goes from 0-360 */
-  /* hint - second color is hue 275, third is 235 ... */
+  /* ============================================
+     TODO 1: FÄRG
+     Vi använder HSL för färger.
+     Ändra första talet (“hue”) för varje kort.
+
+     Exempel:
+     hsl(315, 100%, 60%)    <-- rosa
+     hsl(275, 100%, 60%)    <-- lila
+     hsl(235, 100%, 60%)    <-- blå
+
+     Just nu är alla kort samma färg.
+     Testa lägga olika färger i nth-child längre ner.
+  ============================================= */
   background-color: hsl(315, 100%, 60%);
 
-  /* hint - use rotate with variables and offset the rotation origin */
-  /* hint - first card is at -45deg then add 10deg for each */
+  /* ============================================
+     TODO 2: ROTATION
+     Vi vill skapa en fläkt av kort.
+     Första kortet ska börja på ca -45deg.
+     Varje nästa får +10deg mer.
+
+     Tips:
+     Du kan börja så här:
+        transform: rotate(-45deg);
+
+     Sen kan du använda var(--i) och calc()
+     i nth-child-reglerna längre ner.
+  ============================================= */
   transform: rotate(-45deg);
   transform-origin: center 120%;
-  
-  /* hint - the cards are stacked in the wrong order, can we change that with a css property? */
+
+  /* ============================================
+     TODO 3: ORDNING (z-index)
+     Just nu ligger alla kort i samma ordning.
+     Ändra detta i nth-child längre ner.
+
+     Tips:
+       z-index: var(--i);
+  ============================================= */
+  /* z-index: ??? */
 }
 
-/* hint - use nth-child selectors or similar and override variables */
+/* ============================================
+   nth-child – Sätt index och ev. unik färg här
+   Här kommer du göra det mesta av din logik.
+=============================================== */
+
+.card:nth-child(1) {
+  --i: 0;
+  /* TODO: lägg färg här om du vill */
+}
+
 .card:nth-child(2) {
   --i: 1;
+  /* TODO: ändra bakgrundsfärg */
+  /* TODO: ändra rotation (om du inte gör det i .card) */
+  /* TODO: sätt z-index */
 }
+
+.card:nth-child(3) {
+  --i: 2;
+  /* TODO: fortsätt som ovan */
+}
+
+/* TODO: om du vill, fortsätt för 4, 5, 6... */
